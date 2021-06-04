@@ -43,7 +43,7 @@ jobs:
         uses: wzieba/AppCenter-Github-Action@v1
         with:
           appName: wzieba/TestGithubActions
-          token: '056ea087531e04cb74153d023e545c7c02bd97df'
+          token: 'f2ff310eadc6f0e5e44a23c1100b8c6a4dc566ca'
           group: Testers
           file: app/build/outputs/apk/debug/app-debug.apk
           notifyTesters: true
