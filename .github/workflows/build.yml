@@ -40,7 +40,9 @@ jobs:
         run: bash ./gradlew assembleDebug --stacktrace
 
       - name: Upload our APK
-        uses: actions/upload-artifact@v2
+        uses: wzieba/AppCenter-Github-Action@v1
         with:
-          name: Release artifact
-          path: app/build/outputs/apk/debug/app-debug.apk
+          appName: wzieba/TestGithubActions
+          token: ${{secrets.056ea087531e04cb74153d023e545c7c02bd97df}}
+          file: app/build/outputs/apk/debug/app-debug.apk
+
