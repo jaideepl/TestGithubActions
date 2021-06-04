@@ -37,10 +37,10 @@ jobs:
       # Build artifacts
       - name: Build apk
         id: buildAllApks
-        run: ./gradlew build
+        run: bash ./gradlew assembleDebug --stacktrace
 
-      - name: Upload our APK
-        uses: actions/upload-artifact@v2
-        with:
-          name: Release artifact
-          path: app/build/outputs/apk/ourbuildtype/release/app-artifact-*.apk
+#      - name: Upload our APK
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: Release artifact
+#          path: app/build/outputs/apk/ourbuildtype/release/app-artifact-*.apk
