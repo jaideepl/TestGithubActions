@@ -38,3 +38,9 @@ jobs:
       - name: Build apk
         id: buildAllApks
         run: ./gradlew build
+
+      - name: Upload our APK
+        uses: actions/upload-artifact@v2
+        with:
+          name: Release artifact
+          path: app/build/outputs/apk/ourbuildtype/release/app-artifact-*.apk
