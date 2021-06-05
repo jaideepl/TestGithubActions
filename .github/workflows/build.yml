@@ -34,22 +34,18 @@ jobs:
           java-version: '8'
           check-latest: true
 
-      - name: SSH and deploy node app
-        uses: wzieba/AppCenter-Github-Action@v1
-
       # Build artifacts
-#      - name: Build apk
-#        id: buildAllApks
-#        run: bash ./gradlew assembleDebug --stacktrace
-#
-#      - name: Upload our APK
-#        uses: wzieba/AppCenter-Github-Action@v1
-#        with:
-#          command: appcenter login --token 'dcec4e592bc0be19b1b6e6278309050753dd0230'
-#          appName: wzieba/TestGithubActions
-#          token: ${{secrets.APP_CENTER_TOKEN}}
-#          group: Testers
-#          file: app/build/outputs/apk/debug/app-debug.apk
-#          notifyTesters: true
-#          debug: false
+      - name: Build apk
+        id: buildAllApks
+        run: bash ./gradlew assembleDebug --stacktrace
+
+      - name: Upload our APK
+        uses: wzieba/AppCenter-Github-Action@v1
+        with:
+          appName: wzieba/TestGithubActions jaideepl
+          token: ${{secrets.APP_CENTER_TOKEN}}
+          group: Testers
+          file: app/build/outputs/apk/debug/app-debug.apk
+          notifyTesters: true
+          debug: false
 
