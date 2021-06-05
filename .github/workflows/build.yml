@@ -38,7 +38,7 @@ jobs:
         uses: actions/setup-node@v1
 
       - name: SSH and deploy node app
-        uses: devussy/AppCenter-Distribute-Github-Action@v1.0.5
+        uses: wzieba/AppCenter-Github-Action@v1
 
       # Build artifacts
 #      - name: Build apk
