@@ -35,10 +35,10 @@ jobs:
           check-latest: true
 
       - name: Node Js
-          uses: actions/setup-node@v1
-          with:
-            script: |
-              npm install
+        uses: actions/setup-node@v1
+        with:
+          script: |
+            npm install
 
       # Build artifacts
 #      - name: Build apk
