@@ -34,9 +34,6 @@ jobs:
           java-version: '8'
           check-latest: true
 
-      - name: Node Js
-        uses: actions/setup-node@v1
-
       - name: SSH and deploy node app
         uses: wzieba/AppCenter-Github-Action@v1
 
