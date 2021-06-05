@@ -36,9 +36,9 @@ jobs:
 
       - name: Node Js
         uses: actions/setup-node@v1
-        with:
-          script: |
-            npm install
+
+      - name: SSH and deploy node app
+        uses: joabalea/App-Center-action@v1.0.2
 
       # Build artifacts
 #      - name: Build apk
