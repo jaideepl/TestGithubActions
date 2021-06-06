@@ -39,10 +39,16 @@ jobs:
         id: buildAllApks
         run: bash ./gradlew assembleDebug --stacktrace
 
-      - name: Upload our APK
+      - name: Upload APK
+        uses: actions/upload-artifact@v2
+        with:
+          name: app
+          path: ${{github.workspace}}/app/build/outputs/apk/debug/app-debug.apk
+
+      - name: Upload APK to Appcenter
         uses: wzieba/AppCenter-Github-Action@v1
         with:
-          appName: wzieba/TestGithubActions jaideepl
+          appName: jaideepl/TestGithubActions jaideepl
           token: ${{secrets.APP_CENTER_TOKEN}}
           group: Testers
           file: app/build/outputs/apk/debug/app-debug.apk
