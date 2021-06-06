@@ -17,6 +17,7 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   build:
+    needs: [ unit_tests ]
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -34,24 +35,44 @@ jobs:
           java-version: '8'
           check-latest: true
 
-      # Build artifacts
-      - name: Build apk
-        id: buildAllApks
+      # Build debug apk
+      - name: Build debug apk
         run: bash ./gradlew assembleDebug --stacktrace
 
-      - name: Upload APK
-        uses: actions/upload-artifact@v2
-        with:
-          name: app
-          path: ${{github.workspace}}/app/build/outputs/apk/debug/app-debug.apk
+      # Build release apk
+      - name: Build release apk
+        run: bash ./gradlew assembleRelease --stacktrace
 
-      - name: Upload APK to Appcenter
-        uses: wzieba/AppCenter-Github-Action@v1
+      - name: Sign APK
+        uses: r0adkll/sign-android-release@v1
+        # ID used to access action output
+        id: sign_app
         with:
-          appName: jaideepl/TestGithubActions
-          token: ${{secrets.APP_CENTER_TOKEN}}
-          group: Collaborators
-          file: app/build/outputs/apk/debug/app-debug.apk
-          notifyTesters: true
-          debug: false
+          releaseDirectory: app/build/outputs/apk/release
+          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+          alias: ${{ secrets.ALIAS }}
+          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
+
+      - name: Upload APK
+        uses: actions/upload-artifact@master
+        with:
+          name: release.apk
+          path: ${{steps.sign_app.outputs.signedReleaseFile}}
+
+      - name: Upload Mapping file
+        uses: actions/upload-artifact@master
+        with:
+          name: mapping.txt
+          path: app/build/outputs/mapping/release/mapping.txt
+
+#      - name: Upload APK to Appcenter
+#        uses: wzieba/AppCenter-Github-Action@v1
+#        with:
+#          appName: jaideepl/TestGithubActions
+#          token: ${{secrets.APP_CENTER_TOKEN}}
+#          group: Collaborators
+#          file: app/build/outputs/apk/debug/app-debug.apk
+#          notifyTesters: true
+#          debug: false
 
