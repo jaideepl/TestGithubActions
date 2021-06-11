@@ -59,11 +59,11 @@ jobs:
           name: release.apk
           path: ${{steps.sign_app.outputs.signedReleaseFile}}
 
-      - name: Upload Mapping file
-        uses: actions/upload-artifact@master
-        with:
-          name: mapping.txt
-          path: app/build/outputs/mapping/release/mapping.txt
+#      - name: Upload Mapping file
+#        uses: actions/upload-artifact@master
+#        with:
+#          name: mapping.txt
+#          path: app/build/outputs/mapping/release/mapping.txt
 
       - name: Upload APK to Appcenter
         uses: wzieba/AppCenter-Github-Action@v1
@@ -71,7 +71,7 @@ jobs:
           appName: jaideepl/TestGithubActions
           token: ${{secrets.APP_CENTER_TOKEN}}
           group: Collaborators
-          file: app/build/outputs/apk/debug/app-debug.apk
+          file: app/build/outputs/apk/debug/app-release.apk
           notifyTesters: true
           debug: false
 
